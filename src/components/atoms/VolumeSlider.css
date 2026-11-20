@@ -1,0 +1,25 @@
+.volume {
+  margin-left: auto;
+}
+
+input[type=range] {
+  width: 95px;
+  accent-color: #476d53;
+}
+
+@media(max-width:650px) {
+  .volume {
+    margin-left: 0;
+  }
+}
+
+.toolbar .volume {
+  flex: none;
+}
+
+@media(max-width:650px) {
+  .toolbar .volume {
+    margin-right: auto;
+  }
+}
+

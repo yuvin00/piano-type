@@ -1,0 +1,59 @@
+:root {
+  color-scheme: light;
+  font-family: "Malgun Gothic",system-ui,sans-serif;
+  color: #253e37;
+  background: #f6f8f6;
+  font-synthesis: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #6a786e;
+}
+
+select {
+  font: inherit;
+  color: #304b3d;
+  border: 1px solid #dce3dc;
+  border-radius: 8px;
+  background: #fafcf9;
+  padding: 9px 28px 9px 10px;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+[hidden] {
+  display: none!important;
+}
+
+button:focus-visible,select:focus-visible,input:focus-visible {
+  outline: 3px solid #9eb58a;
+  outline-offset: 3px;
+}
+
+:root {
+  --song-border: #dce3d8;
+}
+

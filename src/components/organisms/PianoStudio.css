@@ -1,0 +1,72 @@
+.studio {
+  border: 1px solid #dce3dc;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 65px #213b3210;
+  background: white;
+}
+
+.instrument {
+  background: #eff3ec;
+  padding: 20px 26px 16px;
+  border-top: 1px solid #e7ece3;
+}
+
+.instrument-meta {
+  display: flex;
+  justify-content: space-between;
+  color: #74836c;
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+}
+
+#note {
+  letter-spacing: 0;
+  font-size: 14px;
+  min-height: 20px;
+}
+
+.instrument-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 17px;
+  color: #7c8975;
+  font-size: 12px;
+}
+
+#restart {
+  border: 0;
+  background: transparent;
+  color: #57734c;
+  font-size: 12px;
+  padding: 6px;
+}
+
+@media(max-width:650px) {
+  .instrument {
+    padding: 18px 12px;
+  }
+}
+
+@media(max-width:650px) {
+  .instrument-bottom {
+    font-size: 11px;
+  }
+}
+
+@media(max-width:650px) {
+  .instrument-bottom {
+    align-items: flex-start;
+  }
+}
+
+@media(max-width:650px) {
+  #progress {
+    max-width: 70%;
+    line-height: 1.7;
+  }
+}
+

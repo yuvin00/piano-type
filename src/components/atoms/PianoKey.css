@@ -1,0 +1,51 @@
+.key {
+  padding: 0;
+  border: 1px solid #ced5c8;
+  position: relative;
+  border-radius: 0 0 5px 5px;
+  flex: 1;
+  background: linear-gradient(#fff,#fafbf6);
+  box-shadow: 0 3px 0 #d4daca;
+  color: #9ba692;
+  min-width: 0;
+}
+
+.key.black {
+  position: absolute;
+  top: 0;
+  height: 62%;
+  width: 2.7%;
+  z-index: 2;
+  background: linear-gradient(#3c453c,#202b23);
+  border-color: #1e2c22;
+  box-shadow: 0 3px 0 #111d15;
+}
+
+.key.active {
+  background: #b1c69e;
+  box-shadow: 0 1px 0 #839773;
+  transform: translateY(2px);
+}
+
+.key.black.active {
+  background: #759465;
+}
+
+.key span {
+  position: absolute;
+  bottom: 9px;
+  left: 0;
+  right: 0;
+  font-size: 10px;
+}
+
+@media(max-width:650px) {
+  .key span {
+    display: none;
+  }
+}
+
+.piano .key.black {
+  width: 1.2%;
+}
+

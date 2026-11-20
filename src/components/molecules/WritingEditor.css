@@ -1,0 +1,54 @@
+.paper {
+  padding: 28px 32px 18px;
+}
+
+textarea {
+  display: block;
+  width: 100%;
+  height: 230px;
+  resize: vertical;
+  border: 0;
+  background: transparent;
+  outline: none;
+  font: 19px/2 "Malgun Gothic",sans-serif;
+  color: #334c3e;
+  letter-spacing: .3px;
+}
+
+textarea::placeholder {
+  color: #b2bcb2;
+}
+
+.paper-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  color: #879386;
+  font-size: 13px;
+  padding-top: 16px;
+}
+
+textarea:focus-visible {
+  box-shadow: inset 3px 0 #d5e3cd;
+  padding-left: 12px;
+}
+
+@media(max-width:650px) {
+  .paper {
+    padding: 20px;
+  }
+}
+
+@media(max-width:650px) {
+  textarea {
+    height: 250px;
+    font-size: 17px;
+  }
+}
+
+@media(max-width:650px) {
+  .paper-footer {
+    font-size: 11px;
+  }
+}
+

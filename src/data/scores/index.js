@@ -1,0 +1,1 @@
+window.PianoType.data.scores = {};

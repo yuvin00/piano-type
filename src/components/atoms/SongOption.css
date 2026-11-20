@@ -1,0 +1,52 @@
+.song-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 10px;
+  text-align: left;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #304b3d;
+  font-size: 14px;
+  min-height: 44px;
+}
+
+.song-option:hover,.song-option:focus-visible {
+  background: #edf2e8;
+  outline: none;
+}
+
+.song-option[aria-checked=true] {
+  background: #e3ebdc;
+}
+
+.song-check {
+  width: 16px;
+  color: #527147;
+  flex-shrink: 0;
+}
+
+.option-title {
+  flex: 1;
+}
+
+.option-speed {
+  font-size: 12px;
+  color: #84917a;
+  white-space: nowrap;
+}
+
+@media(max-width:650px) {
+  .song-option {
+    font-size: 13px;
+  }
+}
+
+@media(max-width:650px) {
+  .option-speed {
+    font-size: 11px;
+  }
+}
+
