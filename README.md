@@ -1,10 +1,8 @@
 # Piano Type · 타자의 선율
 
-브라우저에서 타자를 칠 때마다 곡의 다음 음 또는 화음이 이어집니다. 음색은 FluidR3_GM Acoustic Grand Piano의 88건반 MP3 샘플입니다. 출처와 라이선스는 [AUDIO-CREDITS.md](AUDIO-CREDITS.md)에 있습니다.
+브라우저에서 타자를 칠 때마다 곡이 이어집니다. 음색은 FluidR3_GM Acoustic Grand Piano의 88건반 MP3 샘플입니다. 출처와 라이선스는 [AUDIO-CREDITS.md](AUDIO-CREDITS.md)에 있습니다.
 
 ## 실행
-
-`index.html`을 더블 클릭해 Chrome 또는 Edge로 여세요. 소리 버튼 없이 바로 입력하면 연주합니다. VS Code의 Live Server로 실행해도 됩니다. 설치나 빌드는 필요 없습니다.
 
 브라우저 오디오 정책에 따라 첫 타이핑 또는 클릭 시 오디오가 활성화됩니다. 처음 열면 음원 디코딩 준비에 잠시 시간이 걸릴 수 있습니다. 음원은 로컬에 포함되어 인터넷 연결 없이 실행됩니다.
 
