@@ -181,3 +181,48 @@ test('a pending audio activation does not advance a song after selection changes
   await pending;
   assert.equal(player.snapshot().step, 0);
 });
+
+test('mobile software keyboard plays Latin, Korean composition and line breaks', async () => {
+  const { app, nodes, stats } = createBrowser();
+  const input = nodes.get('writing');
+  await input.fire('touchend');
+  assert.ok(stats.resumes > 0);
+  await input.fire('keydown', { code: '', key: 'Unidentified', keyCode: 229 });
+  input.value += 'a';
+  await input.fire('input', { inputType: 'insertText', data: 'a' });
+  assert.equal(app.player.snapshot().step, 1);
+  input.value += 'ㄱ';
+  await input.fire('input', { inputType: 'insertCompositionText', data: 'ㄱ', isComposing: true });
+  input.value = input.value.slice(0, -1) + '가';
+  await input.fire('input', { inputType: 'insertCompositionText', data: '가', isComposing: true });
+  assert.equal(app.player.snapshot().step, 3);
+  await input.fire('input', { inputType: 'insertText', data: '가' });
+  assert.equal(app.player.snapshot().step, 3, 'same-value composition commit is not replayed');
+  input.value += '\n';
+  await input.fire('input', { inputType: 'insertLineBreak', data: null });
+  assert.equal(app.player.snapshot().step, 4);
+});
+
+test('desktop keydown/input plays once; paste, deletion, undo and repeated keys stay silent', async () => {
+  const { app, nodes } = createBrowser();
+  const input = nodes.get('writing');
+  await input.fire('keydown', { code: 'KeyA' });
+  input.value += 'a';
+  await input.fire('input', { inputType: 'insertText', data: 'a' });
+  await input.fire('keyup');
+  assert.equal(app.player.snapshot().step, 1);
+  await input.fire('keydown', { code: 'KeyA', repeat: true });
+  input.value += 'a';
+  await input.fire('input', { inputType: 'insertText', data: 'a' });
+  await input.fire('keyup');
+  input.value += 'paste';
+  await input.fire('input', { inputType: 'insertFromPaste', data: 'paste' });
+  input.value = input.value.slice(0, -1);
+  await input.fire('input', { inputType: 'deleteContentBackward', data: null });
+  input.value = 'undo';
+  await input.fire('input', { inputType: 'historyUndo' });
+  assert.equal(app.player.snapshot().step, 1);
+  input.value += 'b';
+  await input.fire('input', { inputType: 'insertText', data: 'b' });
+  assert.equal(app.player.snapshot().step, 2);
+});

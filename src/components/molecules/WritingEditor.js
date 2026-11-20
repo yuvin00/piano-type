@@ -9,12 +9,34 @@
     const footer = el('div', { className: 'paper-footer' }, [status, count]);
     const element = el('div', { className: 'paper' }, [label, input, footer]);
     const updateCount = () => { count.textContent = `${Array.from(input.value).length.toLocaleString('ko-KR')}자`; };
-    input.addEventListener('keydown', (event) => { if (PT.utils.isTypingKey(event)) onTyping(); });
+    let skipNextInput = false;
+    let previousValue = '';
+    input.addEventListener('keydown', (event) => {
+      const physicalTyping = PT.utils.isTypingKey(event);
+      // Mobile keyboards often report code="" or "Unidentified" instead of a key.
+      skipNextInput = physicalTyping || Boolean(event.repeat || event.ctrlKey || event.metaKey || event.altKey);
+      if (physicalTyping) onTyping();
+    });
+    input.addEventListener('keyup', () => { skipNextInput = false; });
+    input.addEventListener('blur', () => { skipNextInput = false; });
+    input.addEventListener('paste', () => { skipNextInput = true; });
+    input.addEventListener('drop', () => { skipNextInput = true; });
     input.addEventListener('pointerdown', onActivate);
-    input.addEventListener('input', () => { updateCount(); onChange(input.value); });
+    input.addEventListener('touchend', onActivate);
+    input.addEventListener('input', (event) => {
+      const changed = input.value !== previousValue;
+      const insertion = ['insertText', 'insertCompositionText', 'insertFromComposition', 'insertLineBreak', 'insertParagraph'].includes(event.inputType) ||
+        (!event.inputType && typeof event.data === 'string' && event.data.length > 0);
+      // Composition commits may repeat the same value; desktop input follows keydown.
+      if (changed && insertion && !skipNextInput) onTyping();
+      skipNextInput = false;
+      previousValue = input.value;
+      updateCount();
+      onChange(input.value);
+    });
     return {
       element, focus: () => input.focus(),
-      setText(value) { input.value = value; updateCount(); },
+      setText(value) { input.value = value; previousValue = value; updateCount(); },
       setStatus(text) { status.textContent = text; }
     };
   };
