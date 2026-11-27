@@ -50,7 +50,8 @@
       "notarize": false,
       "extendInfo": {
         "NSInputMonitoringUsageDescription": "다른 프로그램에서 타자를 칠 때 피아노를 연주하기 위해 키 입력 감지가 필요합니다."
-      }
+      },
+      "x64ArchFiles": "**/uiohook-napi/prebuilds/**"
     }
   },
   "devDependencies": {
