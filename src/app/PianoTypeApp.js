@@ -37,10 +37,12 @@
     player = PT.services.createMelodyPlayer({
       song: initialSong, audio, onProgress: studio.showProgress, onNote: studio.showNote
     });
+    const desktopControls = PT.services.connectDesktop({ audio, player, studio });
     const main = PT.utils.element('main', {}, [
       PT.layout.PageIntro(), studio.element,
-      PT.utils.element('p', { className: 'footnote', text: '이 페이지 안에서 입력한 타자에만 반응해요. 글은 이 브라우저에 자동 저장됩니다.' })
+      PT.utils.element('p', { className: 'footnote', text: desktopControls ? '전체 타자 소리를 켜면 다른 프로그램에서도 연주해요. 외부 입력은 저장하지 않습니다. 종료는 트레이 메뉴에서 해주세요.' : '이 페이지 안에서 입력한 타자에만 반응해요. 글은 이 브라우저에 자동 저장됩니다.' })
     ]);
+    if (desktopControls) main.children[0].append(desktopControls);
     root.replaceChildren(PT.layout.AppHeader(), main);
     const draft = storage.read('piano-type-draft');
     studio.editor.setText(draft.value);

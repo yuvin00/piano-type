@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'">
   <title>타자의 선율 · Piano Type</title>
   <link rel="stylesheet" href="src/styles/index.css">
   <script src="src/core/namespace.js" defer></script>
@@ -35,6 +36,7 @@
   <script src="src/components/organisms/PianoStudio.js" defer></script>
   <script src="src/components/layout/AppHeader.js" defer></script>
   <script src="src/components/layout/PageIntro.js" defer></script>
+  <script src="src/services/desktop.js" defer></script>
   <script src="src/app/PianoTypeApp.js" defer></script>
   <script src="src/app/main.js" defer></script>
 </head>

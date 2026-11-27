@@ -85,3 +85,21 @@ h1 {
   }
 }
 
+ .desktop-controls { display: flex; align-items: center; justify-content: flex-end; gap: 10px; flex-wrap: wrap; padding: 8px 0 0; }
+ .desktop-controls button { padding: 10px 18px; border: 1px solid #a89585; border-radius: 8px; background: #f5eee7; color: #453c36; cursor: pointer; font: inherit; }
+ .desktop-controls button[aria-pressed="true"] { background: #453c36; color: #fff8ef; }
+ .desktop-controls span { font-size: 13px; color: #75685d; }
+ .desktop-controls [hidden] { display: none; }
+ .desktop-controls span { flex-basis: 100%; text-align: right; font-size: 11px; }
+ body.compact-mode { margin: 0; overflow: hidden; }
+ .compact-mode header, .compact-mode .intro > p, .compact-mode .intro > h1,
+ .compact-mode .toolbar, .compact-mode .paper, .compact-mode .footnote { display: none; }
+ .compact-mode main { max-width: none; margin: 0; padding: 0 10px 10px; }
+ .compact-mode .intro { margin: 0; }
+ .compact-mode .desktop-controls { padding: 6px 0; gap: 8px; }
+ .compact-mode .desktop-controls button { padding: 3px 10px; font-size: 11px; }
+ .compact-mode .desktop-controls span { flex-basis: auto; margin-right: auto; order: -1; }
+ .compact-mode .studio { box-shadow: none; border-radius: 14px; }
+ .compact-mode .instrument { border-top: 0; padding: 12px 20px 10px; }
+ .compact-mode .instrument-meta { margin-bottom: 8px; }
+ .compact-mode .instrument-bottom { margin-top: 10px; }

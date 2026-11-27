@@ -2,9 +2,45 @@
   "name": "piano-type",
   "version": "1.0.0",
   "private": true,
+  "description": "Piano melodies for typing on Windows and the web",
+  "author": "yuvin00",
+  "main": "desktop/main.cjs",
   "scripts": {
     "dev": "node scripts/dev-server.cjs",
     "start": "node scripts/dev-server.cjs",
-    "test": "node --test tests/project.test.cjs"
+    "test": "node --test tests/*.test.cjs",
+    "desktop": "electron .",
+    "pack:win": "electron-builder --win portable --x64"
+  },
+  "build": {
+    "compression": "store",
+    "npmRebuild": false,
+    "appId": "io.yuvin.pianotype",
+    "productName": "Piano Type",
+    "asarUnpack": [
+      "node_modules/uiohook-napi/**/*"
+    ],
+    "files": [
+      "desktop/**/*",
+      "src/**/*",
+      "assets/**/*",
+      "index.html",
+      "AUDIO-CREDITS.md",
+      "package.json"
+    ],
+    "win": {
+      "target": "portable",
+      "signAndEditExecutable": false
+    },
+    "directories": {
+      "output": "dist"
+    }
+  },
+  "devDependencies": {
+    "electron": "^45.5.0",
+    "electron-builder": "^26.18.0"
+  },
+  "dependencies": {
+    "uiohook-napi": "^1.5.5"
   }
 }

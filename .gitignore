@@ -1,0 +1,5 @@
+node_modules/
+dist/
+desktop-smoke.log
+desktop-full.png
+desktop-mini.png
