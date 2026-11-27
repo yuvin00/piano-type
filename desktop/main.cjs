@@ -80,6 +80,7 @@ else {
     window = new BrowserWindow({
       width: 1200, height: 900, minWidth: 720, minHeight: 600,
       autoHideMenuBar: true,
+      icon: path.join(__dirname, '..', 'assets', 'icons', 'piano.ico'),
       webPreferences: {
         preload: path.join(__dirname, 'preload.cjs'),
         contextIsolation: true, nodeIntegration: false, sandbox: true,
@@ -92,15 +93,7 @@ else {
     ipcMain.handle('piano:state', event => { if (trusted(event)) return state(); });
     ipcMain.handle('piano:enable', (event, value) => { if (trusted(event)) return setEnabled(value === true); });
     ipcMain.handle('piano:compact', (event, value) => { if (trusted(event)) return setCompact(value === true); });
-    // Small generated RGBA icon, with no external asset or network request.
-    const pixels = Buffer.alloc(32 * 32 * 4);
-    for (let y = 0; y < 32; y++) for (let x = 0; x < 32; x++) {
-      const i = (y * 32 + x) * 4;
-      const black = y < 20 && [7, 8, 15, 16, 23, 24].includes(x);
-      pixels[i] = black ? 40 : 245; pixels[i + 1] = black ? 40 : 230;
-      pixels[i + 2] = black ? 55 : 215; pixels[i + 3] = 255;
-    }
-    tray = new Tray(nativeImage.createFromBitmap(pixels, { width: 32, height: 32 }));
+    tray = new Tray(nativeImage.createFromPath(path.join(__dirname, '..', 'assets', 'icons', 'piano.png')).resize({ width: 32, height: 32 }));
     tray.on('double-click', showFullWindow);
     publishState();
     globalShortcut.register('CommandOrControl+Alt+P', () => setEnabled(!enabled));

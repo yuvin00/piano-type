@@ -1,6 +1,6 @@
 {
   "name": "piano-type",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Piano melodies for typing on Windows and the web",
   "author": "yuvin00",
@@ -30,7 +30,8 @@
     ],
     "win": {
       "target": "portable",
-      "signAndEditExecutable": false
+      "signExecutable": false,
+      "icon": "assets/icons/piano.ico"
     },
     "directories": {
       "output": "dist"
