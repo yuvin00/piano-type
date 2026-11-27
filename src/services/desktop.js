@@ -5,10 +5,13 @@
     if (!bridge) {
       const el = PT.utils.element;
       return el('div', { className: 'desktop-download' }, [
+        el('a', { text: 'macOS 앱 다운로드', attributes: {
+          href: 'https://github.com/yuvin00/piano-type/releases/latest/download/Piano-Type-macOS-universal.zip'
+        } }),
         el('a', { text: 'Windows 앱 다운로드', attributes: {
           href: 'https://github.com/yuvin00/piano-type/releases/latest/download/Piano-Type-Windows.exe'
         } }),
-        el('p', { text: 'Windows 10/11 · 다른 프로그램에서도 타자 소리와 미니 피아노를 사용해보세요.' })
+        el('p', { text: 'Mac(Apple Silicon·Intel) / Windows 10·11 · 다른 프로그램에서도 타자로 연주해요.' })
       ]);
     }
     const el = PT.utils.element;
