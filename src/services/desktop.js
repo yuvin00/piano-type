@@ -26,7 +26,7 @@
       button.hidden = Boolean(state.compact);
       toggle.textContent = enabled ? '일시정지' : '소리 켜기';
       toggle.setAttribute('aria-pressed', String(enabled));
-      status.textContent = state.error || (enabled ? '전체 타자 소리 켜짐 · Ctrl+Alt+P' : '다른 프로그램에서도 타자로 연주해요');
+      status.textContent = state.error || (enabled ? `전체 타자 소리 켜짐 · ${state.shortcut || 'Ctrl+Alt+P'}` : '다른 프로그램에서도 타자로 연주해요');
       if (!enabled) audio.stopAll();
     }
     button.addEventListener('click', async () => {

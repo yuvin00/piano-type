@@ -1,12 +1,12 @@
 'use strict';
-const { app, BrowserWindow, Menu, Tray, nativeImage, ipcMain, globalShortcut } = require('electron');
+const { app, BrowserWindow, Menu, Tray, nativeImage, ipcMain, globalShortcut, systemPreferences } = require('electron');
 const path = require('node:path');
 const { pathToFileURL } = require('node:url');
 const { createTypingFilter } = require('./typing-filter.cjs');
 let window, tray, hook, filter;
 let enabled = false, quitting = false, error = '', compact = false, fullBounds, wasMaximized = false;
 const page = pathToFileURL(path.join(__dirname, '..', 'index.html')).href;
-const state = () => ({ enabled, error, compact });
+const state = () => ({ enabled, error, compact, shortcut: process.platform === 'darwin' ? '⌘+Option+P' : 'Ctrl+Alt+P' });
 function setCompact(value) {
   if (value === compact) return state();
   compact = value;
@@ -43,6 +43,12 @@ function publishState() {
 function setEnabled(value) {
   error = '';
   if (value && !enabled) {
+    // Check before starting the native hook: macOS may reject it without Accessibility permission.
+    if (process.platform === 'darwin' && !systemPreferences.isTrustedAccessibilityClient(true)) {
+      error = '시스템 설정 → 개인정보 보호 및 보안 → 손쉬운 사용에서 Piano Type을 허용한 뒤 다시 눌러주세요. 입력 모니터링 권한도 요청되면 허용해주세요.';
+      publishState();
+      return state();
+    }
     try {
       if (!hook) {
         const { uIOhook, UiohookKey } = require('uiohook-napi');
@@ -75,12 +81,13 @@ function trusted(event) { return event.sender === window.webContents && event.se
 
 if (!app.requestSingleInstanceLock()) app.quit();
 else {
+  app.on('activate', () => { if (window && !window.isDestroyed()) showFullWindow(); });
   app.on('second-instance', () => { if (window) { window.show(); window.focus(); } });
   app.whenReady().then(() => {
     window = new BrowserWindow({
       width: 1200, height: 900, minWidth: 720, minHeight: 600,
       autoHideMenuBar: true,
-      icon: path.join(__dirname, '..', 'assets', 'icons', 'piano.ico'),
+      icon: path.join(__dirname, '..', 'assets', 'icons', process.platform === 'darwin' ? 'piano.png' : 'piano.ico'),
       webPreferences: {
         preload: path.join(__dirname, 'preload.cjs'),
         contextIsolation: true, nodeIntegration: false, sandbox: true,

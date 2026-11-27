@@ -116,3 +116,7 @@ VS Code 터미널에서 프로젝트 폴더로 이동한 뒤 npm run dev를 실�
 개발자 서명이 없는 앱이므로 Windows에서 실행 전 경고가 표시될 수 있습니다.
 
 실행 파일은 GitHub Releases에서 배포하며, 다음 버전에도 첨부 파일 이름을 `Piano-Type-Windows.exe`로 유지하면 웹사이트 버튼은 최신 정식 릴리스를 가리킵니다.
+
+## macOS 앱
+
+Apple Silicon 및 Intel 공용 ZIP을 제공합니다. 설치와 권한 안내는 [데스크톱 릴리스 안내](docs/desktop-release.md)를 참고하세요. Mac에서 직접 빌드하려면 npm install 후 npm run pack:mac을 실행하세요. GitHub Actions의 Desktop release 워크플로를 수동 실행하면 Windows와 macOS 앱이 모두 빌드된 뒤 릴리스가 게시됩니다.

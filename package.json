@@ -1,8 +1,8 @@
 {
   "name": "piano-type",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
-  "description": "Piano melodies for typing on Windows and the web",
+  "description": "Piano melodies for typing on Windows, macOS and the web",
   "author": "yuvin00",
   "main": "desktop/main.cjs",
   "scripts": {
@@ -10,7 +10,8 @@
     "start": "node scripts/dev-server.cjs",
     "test": "node --test tests/*.test.cjs",
     "desktop": "electron .",
-    "pack:win": "electron-builder --win portable --x64"
+    "pack:win": "electron-builder --win portable --x64",
+    "pack:mac": "electron-builder --mac zip --universal"
   },
   "build": {
     "compression": "store",
@@ -31,10 +32,25 @@
     "win": {
       "target": "portable",
       "signExecutable": false,
-      "icon": "assets/icons/piano.ico"
+      "icon": "assets/icons/piano.ico",
+      "artifactName": "Piano-Type-Windows.exe"
     },
     "directories": {
       "output": "dist"
+    },
+    "mac": {
+      "target": [
+        "zip"
+      ],
+      "artifactName": "Piano-Type-macOS-universal.zip",
+      "category": "public.app-category.music",
+      "icon": "assets/icons/piano.icns",
+      "identity": "-",
+      "hardenedRuntime": false,
+      "notarize": false,
+      "extendInfo": {
+        "NSInputMonitoringUsageDescription": "다른 프로그램에서 타자를 칠 때 피아노를 연주하기 위해 키 입력 감지가 필요합니다."
+      }
     }
   },
   "devDependencies": {

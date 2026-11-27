@@ -1,0 +1,59 @@
+name: Desktop release
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-latest
+            command: pack:mac
+            asset: dist/Piano-Type-macOS-universal.zip
+            name: macos
+          - os: windows-latest
+            command: pack:win
+            asset: dist/Piano-Type-Windows.exe
+            name: windows
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm test
+      - name: Check native keyboard module
+        run: node -e "require('uiohook-napi'); console.log('Native keyboard module loaded')"
+      - name: Build desktop app
+        run: npm run ${{ matrix.command }} -- --publish never
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.name }}
+          path: ${{ matrix.asset }}
+          if-no-files-found: error
+          compression-level: 0
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: release-assets
+          merge-multiple: true
+      - name: Publish desktop release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          version="v$(node -p "require('./package.json').version")"
+          gh release create "$version" --target "$GITHUB_SHA" --title "Piano Type $version — Windows & macOS" --draft --notes-file docs/desktop-release.md
+          gh release upload "$version" release-assets/*
+          gh release edit "$version" --draft=false --latest
