@@ -103,3 +103,9 @@ h1 {
  .compact-mode .instrument { border-top: 0; padding: 12px 20px 10px; }
  .compact-mode .instrument-meta { margin-bottom: 8px; }
  .compact-mode .instrument-bottom { margin-top: 10px; }
+
+.desktop-download { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; padding-top: 8px; }
+.desktop-download a { display: inline-flex; align-items: center; min-height: 44px; padding: 10px 18px; border: 1px solid #a89585; border-radius: 8px; background: #453c36; color: #fff8ef; font-size: 15px; text-decoration: none; }
+.desktop-download a:hover { background: #5b5149; }
+.desktop-download a:focus-visible { outline: 3px solid #738c78; outline-offset: 3px; }
+.desktop-download p { margin: 0; color: #75685d; font-size: 13px; line-height: 1.7; text-align: right; }

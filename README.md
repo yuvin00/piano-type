@@ -108,3 +108,11 @@ node --test tests/project.test.cjs
 
 VS Code 터미널에서 프로젝트 폴더로 이동한 뒤 npm run dev를 실행하고 http://localhost:3000 에 접속하세요. 패키지 설치는 필요 없습니다. 종료는 Ctrl+C입니다. npm start도 같은 서버를 실행합니다. localhost 주소와 파일 더블 클릭 주소의 브라우저 저장소는 별개입니다.
 
+
+## Windows 앱 다운로드 및 배포
+
+웹사이트의 **Windows 앱 다운로드** 버튼으로 [최신 Windows 실행 파일](https://github.com/yuvin00/piano-type/releases/latest/download/Piano-Type-Windows.exe)을 받을 수 있습니다.
+다운로드한 파일을 실행하고 **미니 피아노 열기**를 누르면 다른 프로그램에서 타자를 칠 때도 연주됩니다.
+개발자 서명이 없는 앱이므로 Windows에서 실행 전 경고가 표시될 수 있습니다.
+
+실행 파일은 GitHub Releases에서 배포하며, 다음 버전에도 첨부 파일 이름을 `Piano-Type-Windows.exe`로 유지하면 웹사이트 버튼은 최신 정식 릴리스를 가리킵니다.

@@ -2,7 +2,15 @@
   'use strict';
   PT.services.connectDesktop = function ({ audio, player, studio }) {
     const bridge = window.pianoDesktop;
-    if (!bridge) return null;
+    if (!bridge) {
+      const el = PT.utils.element;
+      return el('div', { className: 'desktop-download' }, [
+        el('a', { text: 'Windows 앱 다운로드', attributes: {
+          href: 'https://github.com/yuvin00/piano-type/releases/latest/download/Piano-Type-Windows.exe'
+        } }),
+        el('p', { text: 'Windows 10/11 · 다른 프로그램에서도 타자 소리와 미니 피아노를 사용해보세요.' })
+      ]);
+    }
     const el = PT.utils.element;
     const button = el('button', { text: '미니 피아노 열기', attributes: { type: 'button', title: '전체 타자 소리를 켜고 작은 피아노 창 열기' } });
     const toggle = el('button', { text: '일시정지', attributes: { type: 'button', 'aria-pressed': 'false' } });
